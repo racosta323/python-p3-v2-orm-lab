@@ -15,6 +15,37 @@ class Review:
         self.summary = summary
         self.employee_id = employee_id
 
+    @property
+    def year(self):
+        return self._year
+
+    @year.setter
+    def year(self, new_year):
+        if new_year >= 2000:
+            self._year = new_year
+        else:
+            ValueError("Year must be greater or equal to 2000")    
+
+    @property
+    def summary (self):
+        return self._summary
+
+    @summary.setter
+    def summary(self, new_summary):
+        if isinstance(new_summary, str):
+            self._summary = new_summary
+        else:
+            TypeError("Summary must be a string")
+
+    @property
+    def employee_id(self):
+        return self._employee_id
+
+    @employee_id.setter
+    def employee_id(self, new_employee_id):
+        
+        pass        
+
     def __repr__(self):
         return (
             f"<Review {self.id}: {self.year}, {self.summary}, "
