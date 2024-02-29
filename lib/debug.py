@@ -29,5 +29,8 @@ def reset_database():
 
 # reset_database()
 #def __init__(self, year, summary, employee_id, id=None):    
-r1 = Review(2023, "He did well", 1)  
+# r1 = Review(2023, "He did well", 1)  
+# Review.create(2023, "Efficient worker",4)
+
+Review.instance_from_db((1, 2023, "Efficient worker", 4))
 ipdb.set_trace()
