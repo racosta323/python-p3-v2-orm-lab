@@ -43,8 +43,11 @@ class Review:
 
     @employee_id.setter
     def employee_id(self, new_employee_id):
-        
-        pass        
+        if (Employee.find_by_id(new_employee_id)):
+            self._employee_id = new_employee_id  
+        else:
+            raise ValueError("employee_id must reference an employee in the database")
+   
 
     def __repr__(self):
         return (
@@ -156,5 +159,5 @@ class Review:
             SELECT * FROM reviews
         """
         rows = CURSOR.execute(sql).fetchall()
-        return [Review.instance_from_db(row) for row in rows]
+        return [cls.instance_from_db(row) for row in rows]
 
