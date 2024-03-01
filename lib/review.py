@@ -21,10 +21,13 @@ class Review:
 
     @year.setter
     def year(self, new_year):
-        if new_year >= 2000:
-            self._year = new_year
-        else:
-            ValueError("Year must be greater or equal to 2000")    
+        if isinstance(new_year, int):
+            if new_year >= 2000:
+                self._year = new_year
+            else:
+                raise ValueError("Year must be an integer greater or equal to 2000")
+        else: 
+            raise ValueError("Year must be an integer")    
 
     @property
     def summary (self):
@@ -32,10 +35,10 @@ class Review:
 
     @summary.setter
     def summary(self, new_summary):
-        if isinstance(new_summary, str):
+        if isinstance(new_summary, str) and len(new_summary) > 0:
             self._summary = new_summary
         else:
-            TypeError("Summary must be a string")
+            raise ValueError("Summary must be a non-empty string")
 
     @property
     def employee_id(self):
@@ -124,7 +127,7 @@ class Review:
             WHERE id = ?
         """
         row = CURSOR.execute(sql, (id,)).fetchone()
-        return cls.instance_from_db(row)
+        return cls.instance_from_db(row) if row else None
 
     def update(self):
         """Update the table row corresponding to the current Review instance."""
